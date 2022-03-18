@@ -1,3 +1,4 @@
+var generalScore = 0
 // declare global variables
 var seeScoresEl = document.querySelector(".see-scores");
 var timerDisplayEl = document.querySelector(".timer-display");
@@ -22,22 +23,22 @@ var questions = ["What is the scientific name of a wolf?",
                 ];
 
 var answers = {
-    1: ["Canis lupus",
+    0: ["Canis lupus",
                 "Rocky Wolf",
                 "Wolfus Amadeus",
                 "Wolfverine"],
     
-    2: ["Howling Monkey",
+    1: ["Howling Monkey",
                 "Songbird",
                 "Giraffe",
                 "Dolfin"],                        
 
-    3:["A shedonkey",
+    2:["A shedonkey",
                 "A Lady Donkey",
                 "Donkey Bonnie",
                 "A Jenny"],  
 
-    4: ["The Turtle",
+    3: ["The Turtle",
                 "The Elephant",
                 "The Snake",
                 "The cheetah"],  
@@ -49,9 +50,6 @@ var answers = {
 
 answerListEl.addEventListener("click", loopThroughQuestions);
 
-
-
-
 //loop through questions
 var loopThroughQuestions = function(event){
 
@@ -62,6 +60,15 @@ var loopThroughQuestions = function(event){
     }
 
 } //end of loopThroughQuestions
+
+
+// event listener for the estar button
+startBtnEl.addEventListener("click", function(){
+        
+    showQuestions(0, 0)
+    startBtnEl.className = "hide"
+
+});
 
 
 //setting up the question, feeding their index number
@@ -79,23 +86,33 @@ var showQuestions = function (questionNum, answerNum){
 
 }
 
-// event listener for the estar button
-startBtnEl.addEventListener("click", 
-function(){
-showQuestions(1, 1)
-});
-
+var countClick = 0
 //event listener when an aswer is clicked
-answerListEl.addEventListener("click", function (){
+answerListEl.addEventListener("click", function (event){
     var answerClicked = event.target
-    var answerClass = answerClicked.getAttribute("class") 
+    var answerClass = answerClicked.getAttribute("class")
+    var answerText =  answerClicked.textContent
+    countClick +=1  
 
     if(answerClass === "answer"){
-        console.log(answerClass);
+        console.log("answer was clicked" + countClick)
+        showQuestions(countClick, countClick)
     }else {
         console.log("no answer clicked");
     }
-}
-);
+
+    if (answerText === "Canis lupus" || answerText === "Giraffe" || answerText === "A Jenny" || answerText === "The cheetah"  ){
+    console.log("correct!")
+};
+
+    if(countClick > questions.length){
+        answerListEl.className = "hide"
+    }
+});
+
+
+
+
+
 
 
