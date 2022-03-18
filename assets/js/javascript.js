@@ -1,60 +1,50 @@
-// create arrays containing the questions and answers
-var questions = {
-    questions: ["What is the scientific name of a wolf?", 
-                "Which mammal has no vocal cords?",
-                "What is a female donkey called?",
-                "What is the fastest land animal in the world?",
-            ]};
-
-var answers = {
-    first: [
-        "Canis lupus",
-        "Rocky Wolf",
-        "Wolfus Amadeus",
-        "Wolfverine", 
-        firstAnswers:        
-    ],
-    second: [
-        "Howling Monkey",
-        "Songbird",
-        "Giraffe",
-        "Dolfin",
-    ],
-    third: [
-        "A shedonkey",
-        "A Lady Donkey",
-        "Donkey Bonnie",
-        "A Jenny",
-    ],
-    fourth: [
-        "The Turtle",
-        "The Elephant",
-        "The Snake",
-        "The cheetah",
-    ],
-    firtsAnswers: function answers5 (){
-        var answerEl = document.createElement("li");
-        answerEl.className = "answer"
-        answerEl.textContent = answers.q.q;
-        // answerListEl.appendChild(answerEl);
-        answerListEl.innerHTML.replace(answerEl)
-
-    }
-};
-
-// Answer1: Canis lupus
-// Answer2: Giraffe
-// Answer3: A Jenny
-// Answer4: The cheetah
-// Answer5: 22 months"
-
 // declare global variables
 var seeScoresEl = document.querySelector(".see-scores");
 var timerDisplayEl = document.querySelector(".timer-display");
 var startBtnEl = document.querySelector(".start-btn");
 var answerListEl = document.querySelector(".answer-list");
 var quizHeadEl = document.querySelector(".quiz-head");
-var rightWrongMsgEl = document.querySelector(".wrong-right-msg")
+var rightWrongMsgEl = document.querySelector(".wrong-right-msg");
+
+var quizTitleEl = document.querySelector(".quiz-title");
+
+var answerOneEl = document.querySelector("#answer1");
+var answerTwoEl = document.querySelector("#answer2");
+var answerThreeEl = document.querySelector("#answer3");
+var answerFourEl = document.querySelector("#answer4");
+
+
+// create arrays containing the questions and answers
+var questions = ["What is the scientific name of a wolf?", 
+                "Which mammal has no vocal cords?",
+                "What is a female donkey called?",
+                "What is the fastest land animal in the world?",
+                ];
+
+var answers = {
+    1: ["Canis lupus",
+                "Rocky Wolf",
+                "Wolfus Amadeus",
+                "Wolfverine"],
+    
+    2: ["Howling Monkey",
+                "Songbird",
+                "Giraffe",
+                "Dolfin"],                        
+
+    3:["A shedonkey",
+                "A Lady Donkey",
+                "Donkey Bonnie",
+                "A Jenny"],  
+
+    4: ["The Turtle",
+                "The Elephant",
+                "The Snake",
+                "The cheetah"],  
+    };
+
+
+
 
 
 answerListEl.addEventListener("click", loopThroughQuestions);
@@ -74,40 +64,29 @@ var loopThroughQuestions = function(event){
 } //end of loopThroughQuestions
 
 
+//setting up the question, feeding their index number
+var showQuestions = function (questionNum, answerNum){
+    startBtnEl.textContent = "Next Question"
 
-var q = 0
+    //set the first question
+    quizTitleEl.className = "quiz-title"
+    quizTitleEl.textContent = questions[questionNum];
+    //set the first set of answers
+    answerOneEl.textContent = answers[answerNum][0];
+    answerTwoEl.textContent = answers[answerNum][1];
+    answerThreeEl.textContent = answers[answerNum][2];
+    answerFourEl.textContent = answers[answerNum][3];
+
+}
+
 // event listener for the estar button
-startBtnEl.addEventListener("click", function (){
-
-    
-
-            startBtnEl.textContent = "Next Question"
-
-            //set the first question
-            var questionTitleEl = document.createElement("h1");
-            questionTitleEl.className = "quiz-title"
-            questionTitleEl.textContent = questions.questions[q];
-            quizHeadEl.appendChild(questionTitleEl);
-
-            
-            q++
-
-
-
-            for (var i = 0; i < questions.questions.length; i++){
-            //create the answers for each question and append it to the quiz head
-            var answerEl = document.createElement("li");
-            answerEl.className = "answer"
-            answerEl.textContent = answers.q.q;
-            // answerListEl.appendChild(answerEl);
-            answerListEl.innerHTML.replace(answerEl)
-        }
-    
+startBtnEl.addEventListener("click", 
+function(){
+showQuestions(1, 1)
 });
 
-
 //event listener when an aswer is clicked
-answerListEl.addEventListener("click", function (event){
+answerListEl.addEventListener("click", function (){
     var answerClicked = event.target
     var answerClass = answerClicked.getAttribute("class") 
 
@@ -118,3 +97,5 @@ answerListEl.addEventListener("click", function (event){
     }
 }
 );
+
+
