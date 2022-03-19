@@ -155,6 +155,12 @@ var saveScore = function () {
     quizHeadEl.appendChild(saveScoreBtn);
     console.log(saveScoreBtn)
 
+    var seeScoresBtn = document.createElement("button");
+    seeScoresBtn.innerHTML = "SEE SCORES"
+    seeScoresBtn.className = "button-style"
+    quizHeadEl.appendChild(seeScoresBtn);
+    console.log(seeScoresBtn)
+
     // saveToLocal()
     saveScoreBtn.addEventListener("click", function (){
         
@@ -170,6 +176,8 @@ var saveScore = function () {
         localStorage.setItem("scores", JSON.stringify(highScores));
     }
  )
+
+    seeScoresBtn.addEventListener("click", getScores);
 };
 
 
@@ -177,9 +185,15 @@ var saveScore = function () {
 
 
 // gettItem() 
-var getHighScores = function(){
+var getScores = function(){
 
+    
 
     for (var i = 0; i < highScores.length; i++){
+        
+
+
+        rightWrongMsgEl.
         console.log(highScores[i].initials, highScores[i].score)};
+
 }
