@@ -118,9 +118,31 @@ answerListEl.addEventListener("click", function (event){
     }
 });
 
+var saveScore = function () {
+    quizTitleEl.innerHTML = "You can save your Score of "+ generalScore + " . what are your initials?"
+    rightWrongMsgEl.innerHTML = "See the Higest Scores"
 
+    var initialsInput = document.createElement("input");
+    initialsInput.setAttribute("type", "text");
+    initialsInput.className = "input-style"
+    quizHeadEl.appendChild(initialsInput);
+    console.log(initialsInput)
 
+    var saveScoreBtn = document.createElement("button");
+    saveScoreBtn.innerHTML = "SAVE SCORE"
+    saveScoreBtn.setAttribute("type", "submit");
+    saveScoreBtn.className = "button-style"
+    quizHeadEl.appendChild(saveScoreBtn);
+    console.log(saveScoreBtn)
 
-
+    // saveToLocal()
+    saveScoreBtn.addEventListener("click", function (){
+        localStorage.setItem("score", JSON.stringify(generalScore));
+    
+        var playerInitials = initialsInput.value
+        localStorage.setItem("player", JSON.stringify(playerInitials));
+    }
+ )
+};
 
 
