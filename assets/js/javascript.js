@@ -14,6 +14,7 @@ var answerTwoEl = document.querySelector("#answer2");
 var answerThreeEl = document.querySelector("#answer3");
 var answerFourEl = document.querySelector("#answer4");
 
+var highScores = JSON.parse(localStorage.getItem("scores")) || [];
 
 // create arrays containing the questions and answers
 var questions = ["What is the scientific name of a wolf?", 
@@ -75,7 +76,8 @@ startBtnEl.addEventListener("click", function(){
         minute--
         timerDisplayEl.innerHTML = minute + " seconds left"
         } else if (minute > 0 && rightWrongMsgEl.innerHTML !== "You are Correct!") {
-        console.log("timer should be 10less")
+            minute = minute - 10;
+            console.log("timer should be 10less")
         } else {
         timerDisplayEl.innerHTML = "You're Done!"
         }
@@ -124,6 +126,7 @@ answerListEl.addEventListener("click", function (event){
     rightWrongMsgEl.innerHTML = "You are Correct!"
     } else {
         rightWrongMsgEl.innerHTML = "Wrong answer!"
+        minute = minute-10;
     }
 
 
@@ -136,7 +139,7 @@ answerListEl.addEventListener("click", function (event){
 });
 
 var saveScore = function () {
-    quizTitleEl.innerHTML = "You can save your Score of "+ generalScore + " . what are your initials?"
+    quizTitleEl.innerHTML = "You can save your Score of "+ minute + " . what are your initials?"
     rightWrongMsgEl.innerHTML = ""
 
     var initialsInput = document.createElement("input");
@@ -154,13 +157,29 @@ var saveScore = function () {
 
     // saveToLocal()
     saveScoreBtn.addEventListener("click", function (){
-        localStorage.setItem("score", JSON.stringify(generalScore));
-    
-        var playerInitials = initialsInput.value
-        localStorage.setItem("player", JSON.stringify(playerInitials));
+        
+        var playerInitials = initialsInput.value;
+
+        var playerInfo = {
+            initials: playerInitials,
+            score: minute
+        };
+
+        highScores.push(playerInfo);
+
+        localStorage.setItem("scores", JSON.stringify(highScores));
     }
  )
 };
 
 
+//ceeate a button that displays a page where you can see the highscores
 
+
+// gettItem() 
+var getHighScores = function(){
+
+
+    for (var i = 0; i < highScores.length; i++){
+        console.log(highScores[i].initials, highScores[i].score)};
+}
