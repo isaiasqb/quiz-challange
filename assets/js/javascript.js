@@ -94,7 +94,7 @@ answerListEl.addEventListener("click", function (event){
     var answerText =  answerClicked.textContent
     countClick +=1  
 
-    if(answerClass === "answer"){
+    if(answerClass === "answer" && countClick < questions.length){
         console.log("answer was clicked" + countClick)
         showQuestions(countClick, countClick)
     }else {
@@ -103,10 +103,18 @@ answerListEl.addEventListener("click", function (event){
 
     if (answerText === "Canis lupus" || answerText === "Giraffe" || answerText === "A Jenny" || answerText === "The cheetah"  ){
     console.log("correct!")
-};
+    rightWrongMsgEl.innerHTML = "You are Correct!"
+    generalScore += 10; 
+    } else {
+        rightWrongMsgEl.innerHTML = "Wrong answer!"
+    }
 
-    if(countClick > questions.length){
-        answerListEl.className = "hide"
+
+    if(countClick >= questions.length){
+        answerListEl.className = "hide";
+        countClick = "";
+        quizTitleEl.innerHTML = "You Made it! your score is: "+ generalScore
+        saveScore()
     }
 });
 
