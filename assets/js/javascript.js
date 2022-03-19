@@ -48,6 +48,8 @@ var answers = {
 
 
 
+
+
 answerListEl.addEventListener("click", loopThroughQuestions);
 
 //loop through questions
@@ -61,15 +63,29 @@ var loopThroughQuestions = function(event){
 
 } //end of loopThroughQuestions
 
+//seting  the initial minute for the counter
+var minute = 60
 
 // event listener for the estar button
 startBtnEl.addEventListener("click", function(){
-        
+
+    //setting the counter
+    setInterval(function(){
+        if(minute > 0){
+        minute--
+        timerDisplayEl.innerHTML = minute + " seconds left"
+        } else if (minute > 0 && rightWrongMsgEl.innerHTML !== "You are Correct!") {
+        console.log("timer should be 10less")
+        } else {
+        timerDisplayEl.innerHTML = "You're Done!"
+        }
+    }, 1000);
+    
     showQuestions(0, 0)
     startBtnEl.className = "hide"
-
-});
-
+    
+    });
+        
 
 //setting up the question, feeding their index number
 var showQuestions = function (questionNum, answerNum){
@@ -83,7 +99,6 @@ var showQuestions = function (questionNum, answerNum){
     answerTwoEl.textContent = answers[answerNum][1];
     answerThreeEl.textContent = answers[answerNum][2];
     answerFourEl.textContent = answers[answerNum][3];
-
 }
 
 var countClick = 0
@@ -101,10 +116,12 @@ answerListEl.addEventListener("click", function (event){
         console.log("no answer clicked");
     }
 
-    if (answerText === "Canis lupus" || answerText === "Giraffe" || answerText === "A Jenny" || answerText === "The cheetah"  ){
+    if (answerText === "Canis lupus" 
+        || answerText === "Giraffe" 
+        || answerText === "A Jenny" 
+        || answerText === "The cheetah"){
     console.log("correct!")
     rightWrongMsgEl.innerHTML = "You are Correct!"
-    generalScore += 10; 
     } else {
         rightWrongMsgEl.innerHTML = "Wrong answer!"
     }
@@ -120,7 +137,7 @@ answerListEl.addEventListener("click", function (event){
 
 var saveScore = function () {
     quizTitleEl.innerHTML = "You can save your Score of "+ generalScore + " . what are your initials?"
-    rightWrongMsgEl.innerHTML = "See the Higest Scores"
+    rightWrongMsgEl.innerHTML = ""
 
     var initialsInput = document.createElement("input");
     initialsInput.setAttribute("type", "text");
@@ -144,5 +161,6 @@ var saveScore = function () {
     }
  )
 };
+
 
 
