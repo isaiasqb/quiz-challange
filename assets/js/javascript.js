@@ -134,9 +134,8 @@ answerListEl.addEventListener("click", function (event){
     if(countClick >= questions.length){
         answerListEl.className = "hide";
         countClick = "";
-        // quizTitleEl.innerHTML = "You Made it! your score is: "+ generalScore
+        timerDisplayEl.className = "hide"
         saveScore()
-        currentSecond.push(minute.value);
         console.log(currentSecond);
     }
 });
@@ -145,13 +144,20 @@ answerListEl.addEventListener("click", function (event){
 
 var saveScore = function () {
 
-    timerDisplayEl.innerHTML = "You're Done!" 
 
-    quizTitleEl.innerHTML = "You can save your Score of "+ minute + " . what are your initials?"
+
+    quizTitleEl.innerHTML = "You can save your Score of:"
+    
+    var scoreTitleEl = document.createElement("p")
+    scoreTitleEl.textContent = minute
+    scoreTitleEl.className = "quiz-title"
+    quizHeadEl.appendChild(scoreTitleEl);
+    
     rightWrongMsgEl.innerHTML = ""
 
     var initialsInput = document.createElement("input");
     initialsInput.setAttribute("type", "text");
+    initialsInput.setAttribute("placeholder", "YOUR INITIALS")
     initialsInput.className = "input-style"
     quizHeadEl.appendChild(initialsInput);
     console.log(initialsInput)
@@ -185,7 +191,7 @@ var saveScore = function () {
 
         var playerInfo = {
             initials: playerInitials,
-            score: minute,
+            score: scoreTitleEl.innerText,
         };
 
         highScores.push(playerInfo);
