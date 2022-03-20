@@ -51,7 +51,7 @@ main{
   .button-style {
         background-color: var(--light);
         border: none;
-        color: var(--pink);
+        color: var(--dark);
         width: 15%;
         padding: 1.5% 0px;
         text-align: center;
@@ -121,4 +121,17 @@ footer {
 
 .hide {
     display: none;
+}
+
+.score-title {
+    background-color: var(--clear);
+    padding: 1.5%;
+    color: var(--dark);
+    margin-bottom: 2%;
+    border-radius: 15px;
+    box-shadow: rgb(0, 0, 0) 5px 5px 20px;
+}
+
+.score-list{
+    margin-left: 6%;
 }

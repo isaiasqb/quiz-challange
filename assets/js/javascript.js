@@ -42,7 +42,7 @@ var answers = {
         "The Snake"], 
     4: ["A Bank of crows",
         "A Murder of crows",
-        "A school fo crows",
+        "A school of crows",
         "A Gang of crows"]  
     };
 
@@ -86,6 +86,8 @@ startBtnEl.addEventListener("click", function(){
     
     showQuestions(0, 0)
     startBtnEl.className = "hide"
+
+    answerListEl.classList.remove('hide');
     
     });
         
@@ -226,13 +228,15 @@ var saveScore = function () {
 var getScores = function(){
 
     var scoresHeading = document.createElement("p");
-        scoresHeading.innerHTML = "PLAYER"+"________"+"SCORE"
+        scoresHeading.innerHTML = "PLAYER"+"________"+"SCORE";
+        scoresHeading.className = "score-title"
         rightWrongMsgEl.appendChild(scoresHeading);
 
     for (var i = 0; i < highScores.length; i++){
         
         var scoresToShow = document.createElement("p");
-        scoresToShow.innerHTML = highScores[i].initials +" ------------------- "+ highScores[i].score
+        scoresToShow.innerHTML = highScores[i].initials +" ................. "+ highScores[i].score;
+        scoresToShow.className = "score-list"
         rightWrongMsgEl.appendChild(scoresToShow);
         // console.log()};
 
