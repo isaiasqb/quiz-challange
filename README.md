@@ -25,6 +25,6 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
+The following animation is what we took as inspiration for this challange:
 
 ![Demonstration of the Coding Quiz Challenge.](./assets/mockup.gif)
