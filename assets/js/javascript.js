@@ -77,7 +77,6 @@ startBtnEl.addEventListener("click", function(){
         timerDisplayEl.innerHTML = minute + " seconds left"
         } else if (minute > 0 && rightWrongMsgEl.innerHTML !== "You are Correct!") {
             minute = minute - 10;
-            console.log("timer should be 10less")
         } else {
         timerDisplayEl.innerHTML = "You're Done!"
         }
@@ -91,7 +90,6 @@ startBtnEl.addEventListener("click", function(){
 
 //setting up the question, feeding their index number
 var showQuestions = function (questionNum, answerNum){
-    startBtnEl.textContent = "Next Question"
 
     //set the first question
     quizTitleEl.className = "quiz-title"
@@ -125,7 +123,7 @@ answerListEl.addEventListener("click", function (event){
     console.log("correct!")
     rightWrongMsgEl.innerHTML = "You are Correct!"
     } else {
-        rightWrongMsgEl.innerHTML = "Wrong answer!"
+        rightWrongMsgEl.innerHTML = "Wrong answer! (-10sec)"
         minute = minute-10;
     }
 
@@ -159,7 +157,16 @@ var saveScore = function () {
     seeScoresBtn.innerHTML = "SEE SCORES"
     seeScoresBtn.className = "button-style"
     quizHeadEl.appendChild(seeScoresBtn);
-    console.log(seeScoresBtn)
+
+    var clearScoresBtn = document.createElement("button");
+    clearScoresBtn.innerHTML = "CLEAR SCORES"
+    clearScoresBtn.className = "button-style"
+    quizHeadEl.appendChild(clearScoresBtn);
+
+    var goBackBtn = document.createElement("button");
+    goBackBtn.innerHTML = "GO BACK"
+    goBackBtn.className = "button-style"
+    quizHeadEl.appendChild(goBackBtn);
 
     // saveToLocal()
     saveScoreBtn.addEventListener("click", function (){
@@ -174,10 +181,25 @@ var saveScore = function () {
         highScores.push(playerInfo);
 
         localStorage.setItem("scores", JSON.stringify(highScores));
-    }
- )
 
-    seeScoresBtn.addEventListener("click", getScores);
+        saveScoreBtn.className = "hide";
+    })
+
+    seeScoresBtn.addEventListener("click", function(){
+        seeScoresBtn.className ="hide";
+        getScores();
+    });
+
+    goBackBtn.addEventListener("click", function(event){
+        console.dir(event.target)
+        location.reload()
+    });
+
+    clearScoresBtn.addEventListener("click", function(){
+        clearScoresBtn.className ="hide";
+        localStorage.clear();
+        rightWrongMsgEl.innerHTML = ""
+    });
 };
 
 
@@ -187,13 +209,16 @@ var saveScore = function () {
 // gettItem() 
 var getScores = function(){
 
-    
+    var scoresHeading = document.createElement("p");
+        scoresHeading.innerHTML = "PLAYER"+"________"+"SCORE"
+        rightWrongMsgEl.appendChild(scoresHeading);
 
     for (var i = 0; i < highScores.length; i++){
         
+        var scoresToShow = document.createElement("p");
+        scoresToShow.innerHTML = highScores[i].initials +" ------------------- "+ highScores[i].score
+        rightWrongMsgEl.appendChild(scoresToShow);
+        // console.log()};
 
-
-        rightWrongMsgEl.
-        console.log(highScores[i].initials, highScores[i].score)};
-
+}
 }

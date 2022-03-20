@@ -59,6 +59,7 @@ main{
         display: inline-block;
         border-radius: 10px;
         box-shadow: grey 5px 5px 10px;
+        margin-right: 1.5%;
   }
 
 .quiz-title {
