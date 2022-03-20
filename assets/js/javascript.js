@@ -1,4 +1,4 @@
-var generalScore = 0
+// var generalScore = 0
 // declare global variables
 var questionNumberEl = document.querySelector(".question-number");
 var timerDisplayEl = document.querySelector(".timer-display");
@@ -21,38 +21,30 @@ var questions = ["What is the scientific name of a wolf?",
                 "Which mammal has no vocal cords?",
                 "What is a female donkey called?",
                 "What is the fastest land animal in the world?",
-                "What is a group or crows called?"
-                ];
+                "What is a group of crows called?"];
 
 var answers = {
     0: ["Canis lupus",
-                "Rocky Wolf",
-                "Wolfus Amadeus",
-                "Wolfverine"],
-    
+        "Rocky Wolf",
+        "Wolfus Amadeus",
+        "Wolfverine"],
     1: ["Howling Monkey",
-                "Songbird",
-                "Giraffe",
-                "Dolfin"],                        
-
+        "Songbird",
+        "Giraffe",
+        "Dolfin"],                        
     2:["A shedonkey",
-                "A Lady Donkey",
-                "Donkey Bonnie",
-                "A Jenny"],  
-
-    3: ["The Turtle",
-                "The Elephant",
-                "The Snake",
-                "The cheetah"], 
+        "A Lady Donkey",
+        "Donkey Bonnie",
+        "A Jenny"],  
+    3: ["The cheetah",
+        "The Turtle",
+        "The Elephant",
+        "The Snake"], 
     4: ["A Bank of crows",
-                "A school fo crows",
-                "A Gang of crows",
-                "A Murder of crows"],  
+        "A Murder of crows",
+        "A school fo crows",
+        "A Gang of crows"]  
     };
-
-
-
-
 
 
 
@@ -71,6 +63,9 @@ var loopThroughQuestions = function(event){
 
 //seting  the initial minute for the counter
 var minute = 60
+var currentSecond = "";
+
+var counterInterval = ""
 
 // event listener for the estar button
 startBtnEl.addEventListener("click", function(){
@@ -83,24 +78,20 @@ startBtnEl.addEventListener("click", function(){
         } else if (minute > 0 && rightWrongMsgEl.innerHTML !== "You are Correct!") {
             minute = minute - 10;
         } 
-                                        //  else if (quizTitleEl.innerHTML.matchAll("score")) {
-                                        // timerDisplayEl.innerHTML = "You're Done!"
-                                        // minute = minute
-                                        // }
-        else if (minute === 0 ) {
+        else if (minute === 0) {
         timerDisplayEl.innerHTML = "You're Done!"
         minute = minute
         }
     }, 1000);
     
-    showQuestions(0, 0, 1)
+    showQuestions(0, 0)
     startBtnEl.className = "hide"
     
     });
         
 
 //setting up the question, feeding their index number
-var showQuestions = function (questionNum, answerNum, place){
+var showQuestions = function (questionNum, answerNum){
 
     //set the first question
     quizTitleEl.className = "quiz-title"
@@ -110,8 +101,6 @@ var showQuestions = function (questionNum, answerNum, place){
     answerTwoEl.textContent = answers[answerNum][1];
     answerThreeEl.textContent = answers[answerNum][2];
     answerFourEl.textContent = answers[answerNum][3];
-
-    // questionNumberEl.textContent = "Question #"+place;
 }
 
 var countClick = 0
@@ -145,12 +134,18 @@ answerListEl.addEventListener("click", function (event){
     if(countClick >= questions.length){
         answerListEl.className = "hide";
         countClick = "";
-        quizTitleEl.innerHTML = "You Made it! your score is: "+ generalScore
+        // quizTitleEl.innerHTML = "You Made it! your score is: "+ generalScore
         saveScore()
+        currentSecond.push(minute.value);
+        console.log(currentSecond);
     }
 });
 
+
+
 var saveScore = function () {
+
+    timerDisplayEl.innerHTML = "You're Done!" 
 
     quizTitleEl.innerHTML = "You can save your Score of "+ minute + " . what are your initials?"
     rightWrongMsgEl.innerHTML = ""
